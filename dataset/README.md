@@ -1,4 +1,4 @@
-### public HDX datasets contains 60 min / 1 hour time point
+### public HDX datasets contain 60 min / 1 hour time point
 - For all the exposure time in the files, if in second, keep 3600, if in min, keep 60, if in hour, keep 1.
 - For all files, what should be output: "Sequence", "Maxuptake", "Exposure", "Update". There is an "Update SD" column, pay attension to it, we don't need uptake SD.
 - We only care about stand alone protein for now, so here is what we want to keep in the "state":
