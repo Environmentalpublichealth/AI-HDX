@@ -18,7 +18,16 @@
     - `TableS1_HDXMS_Data_Results_19199`: Unbound (in tab 'Uptake_summary') 
 
 Need a python script to filter the tables.      
+
+### Task 1
 1. read csv file
 2. select the desired state
 3. select the desired time
 4. output wanted columns into a new csv file
+
+### Task 2
+calculate MaxUptake for tables don't have it.
+MaxUptake = (length of sequence) - 1 - (number of P)
+
+### Task 3
+Calculate tables not have 60 min or 1 hour or 3600 seconds.
