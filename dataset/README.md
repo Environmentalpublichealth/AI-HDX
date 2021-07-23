@@ -31,3 +31,24 @@ MaxUptake = (length of sequence) - 1 - (number of P)
 
 ### Task 3
 Calculate tables not have 60 min or 1 hour or 3600 seconds.
+
+### Task 4
+We encoded the protein sequence from a different way. I used to use a fixed matrix to represent each AA acids in the sequence. Now, I changed to a methods used in alphafold, to align the entire protein against a database, which standardize the AA encoding. Then I will need the information of the full-length protein sequences for each of the data table.          
+Please create a script that takes 'start' and 'end' positions and the short sequences, to assemble them into the full length. It is OK to have small gaps (ex. 1-7 amino acid + 10-20 amino acid) in the sequence. The alignment program can take care of it. The output could be in either these two formats:
+```fasta
+>20181213_AriH2_StateData
+protein sequence MWEADAVSSVLSLLSILL
+>HDX_19884_kawasaki
+sequence
+>filename
+sequence
+...
+```
+Or just put them as a table format like:
+```txt
+20181213_AriH2_StateData    sequence
+HDX_19884_kawasaki  sequence
+filename1    sequence
+...
+```
+Some HDX data tables do not have start and end positions for the sequence, then we can't use them, so let's not worry about those.
