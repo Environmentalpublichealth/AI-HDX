@@ -34,6 +34,9 @@ done
 Each protein is stored in a single fasta file, so I used a for loop to run all files.
 
 Transfer `.hhm` files to local.
+```bash
+rsync -a grace.tamu:/scratch/user/jialiyu/BlitSearch/hhm_data .
+```
 
 ## Extract amino acid surface area from PDB file
 Search for the right protein and get the correct PDB files from either PDB or AlphaFold database.
