@@ -27,6 +27,16 @@ for key, value in AA_array.items():
     AA_array[key] = value
 
 with open(hhm_file) as f, open(dssp_file) as df, open(output_file ,"w") as out:
+    # read the dssp file line by line and add the HMM values in
+    sequence_matrix = []
+    for line in df:
+        hhm_vector = []
+        content = line.split()
+        hhm_vector = hhm_vector + content[:2] + [content[3]] # extract sequence AA and accessible surface area from dssp.txt
+        property_m = AA_array[content[1]] # assign each AA with its own property matrix, adopted from HDMD
+        hhm_vector = hhm_vector + property_m # AA property features
+        sequence_matrix.append(hhm_vector)
+    
     for i in f:
         if i.startswith("#"):
             break
@@ -44,20 +54,14 @@ with open(hhm_file) as f, open(dssp_file) as df, open(output_file ,"w") as out:
         next_line = lines[idx*3+1].replace("*","99999")
         content1 = first_line.strip().split()
         content2 = next_line.strip().split()
-        
-        # read the dssp file line by line and add the HMM values in
-        for line in df:
-            hhm_vector = []
-            content = line.split()
-            hhm_vector = hhm_vector + content[:2] + [content[3]] # extract sequence AA and accessible surface area from dssp.txt
-            property_m = AA_array[content[1]] # assign each AA with its own property matrix, adopted from HDMD
-            hhm_vector = hhm_vector + property_m # AA property features
-            for val1 in content1[2:-1]:
-                hhm_val1 = 10/(1 + math.exp(-1 * int(val1)/2000))
-                hhm_vector.append(str(hhm_val1))
-            for val2 in content2:
-                hhm_val2 = 10/(1 + math.exp(-1 * int(val2)/2000))
-                hhm_vector.append(str(hhm_val2))
+        for val1 in content1[2:-1]:
+            hhm_val1 = 10/(1 + math.exp(-1 * int(val1)/2000))
+            # hhm_vector.append(str(hhm_val1))
+            sequence_matrix[idx].append(str(hhm_val1))
+        for val2 in content2:
+            hhm_val2 = 10/(1 + math.exp(-1 * int(val2)/2000))
+            # hhm_vector.append(str(hhm_val2))
+            sequence_matrix[idx].append(str(hhm_val2))
         # output the vector for each AA in the protein
-            # print(hhm_vector)
-            out.write("\t".join(hhm_vector)+"\n")
+    for item in sequence_matrix:
+        out.write("\t".join(item)+"\n")
