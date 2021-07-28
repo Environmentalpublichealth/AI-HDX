@@ -52,3 +52,39 @@ filename1    sequence
 ...
 ```
 Some HDX data tables do not have start and end positions for the sequence, then we can't use them, so let's not worry about those.
+
+### Task 5
+Build a simple model!            
+I am working on some really complex deep learning models to learn the sequence and HDX rates. What you can do now, is to help me build a very very simple model as a prediction baseline!
+* 1. Convert a peptide sequence into a vector. The machine learning model does not take text, so we need to encode protein sequence into a set of numbers. Here, let's use the simplest way: protein sequences is consist of 20 amino acides, we just count how many [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y] in each peptide, and make it into a vector. For example, a peptide sequence 'GTAGSAEEPS' should encode as [2,0,0,2,0,2,0,0,0,0,0,0,1,0,0,2,1,0,0,0]. Do this encoding for all peptides in the HDX tables.
+* 2. For the selected HDX result tables, if a D% is given, use that number, if not, calculate the D% with this equation `D% = uptake / (Maxuptake * 0.7) * 100`. To make things easy, we just use a constent back-exchange rate for all tables for now. But remember it is not always true for all experiments, back-exchange is ranged from 10% to 40%, we take the middle value for now.
+* 3. Remove the overlap sequence, to avoid overfitting issue. I created a function for that, feel free to use it or you can creat one yourself.
+```python
+def removeOverlap(start_list, end_list):
+  uniq_start = []
+  uniq_end = []
+  uniq_idx = []
+  for idx1, val1 in enumerate(start_list[:-1]):
+    overlap = False
+    uniq_idx.append(idx1)
+    uniq_start.append(val1)
+    uniq_end.append(end_list[idx1])
+    for val2 in start_list[idx1+1:]:
+      if val1 >= val2 and end_list[idx1] <= end_list[idx1+1]:
+        overlap = True
+        break
+    if overlap == True:
+        uniq_start.pop()
+        uniq_end.pop()
+        uniq_idx.pop()
+  return uniq_start, uniq_end, uniq_idx
+```
+`start_list` - a list of start positions for the peptides.         
+`end_list` - a list of end positions for the peptides.       
+Outputs: a list of unique start positions, a list of end positions and a list of the index, for filtering labels later on.      
+* 4. Now start to build a model!
+    - You need to know, the 20 numbers vector is your input, and the HDX rate is your label. Remember to convert the percentage numbers into (0, 1).
+    - To do the training, we need to split the data into training set and validation set, follow the 7:3 rule. Randomly select 70% of the data as training and 30% of the data as testing. (Tip, use `train_test_split()` function in `sklearn.model_selection`)
+    - Select a classifier and train it! A simple classifier can be `sklearn.svm.SVR`. 
+    - Evaluate your prediction, by R squred and mean_squared_error. (Tips: `r2_score()` and `mean_squared_error()` functions in sklearn.metrics)
+    - Ajust the classifier parameters to get a performance as good as possible, need to keep trying different parameters.
