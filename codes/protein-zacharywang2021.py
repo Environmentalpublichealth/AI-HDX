@@ -163,7 +163,7 @@ class data_results(variable_capture):
 
     def protein_merge(self, start, end, sequence):
         '''
-        fdsfsadsaf
+        assembles the full length protein sequence 
         '''
         
         def protein_finder(merged_protein, start, end, sequence, position): #recursive function
