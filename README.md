@@ -58,3 +58,17 @@ python codes/MSA_embedding.py <hhm file> <pdb.dssp.txt> <property_matrix.csv> <o
 ```
 Each AA of a protein will be represented by the 36 numbers in the `output.vector.txt`.           
 Use the `output.vector.txt` to encode the peptide sequences in the HDX result table.
+
+## Protein structure prediction by RoseTTAFold
+Proteins with mutations and from non-model organisms rarely have protein crystal structures, not on the AlphaFold database either. We use RosseTTAFold to predict it instead. The program has been installed by the HPRC staff as a conda environment on Grace. 
+```bash
+git clone https://github.com/RosettaCommons/RoseTTAFold.git
+# login to Grace cluster
+module load Anaconda3/2021.05
+source activate /sw/hprc/sw/Anaconda3/2021.05/envs/RoseTTAFold
+# test if it worked
+cd RoseTTAFold/example
+../run_e2e_ver.sh input.fa .
+```
+No error message!        
+**Note!** When running our own input sequence, need to adjust the MSA preposcessing bash script and `run_e2e_ver.sh` to correct the path.
