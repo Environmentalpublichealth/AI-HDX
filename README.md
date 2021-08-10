@@ -70,5 +70,5 @@ source activate /sw/hprc/sw/Anaconda3/2021.05/envs/RoseTTAFold
 cd RoseTTAFold/example
 ../run_e2e_ver.sh input.fa .
 ```
-No error message!        
-**Note!** When running our own input sequence, need to adjust the MSA preposcessing bash script and `run_e2e_ver.sh` to correct the path.
+No error message print on the screen!        
+**Note!** But there are errors in the log folder, need to adjust the MSA preposcessing bash script and `run_e2e_ver.sh` to correct the path of database and conda environment source.
