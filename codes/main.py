@@ -5,8 +5,9 @@ from protein_merge import protein_merge
 manager = open("manager.txt", "r")
 
 for row in manager: 
+    
     files = row.split(": ")
-
+    uptakepredict = input(files[0] +"Exposure prediction: ")
     df = pd.read_csv(files[0] +".csv")
 
     #maxuptake
@@ -19,7 +20,7 @@ for row in manager:
             mut.append(row["Maxuptake"])
 
     #uptake prediction
-    xlist, ylist, predict, predictedvals = [], [], 1.25, []
+    xlist, ylist, predict, predictedvals = [], [], float(uptakepredict), []
     for index, row in df.iterrows():
         xlist.append(row["Exposure"])
         ylist.append(row["Uptake"])
@@ -31,8 +32,9 @@ for row in manager:
         start.append(row["Start"])
         end.append(row["End"])
         sequence.append(row["Sequence"])
-    print(protein_merge(start, end, sequence))
+    protein_merge(start, end, sequence)
 
+    #writing all the data to a results file
     i = 0; j = []
     for index, row in df.iterrows():
         
@@ -41,6 +43,6 @@ for row in manager:
         
             pd.DataFrame(j, index = None, columns = ["Start", "End", "Sequence","State", "Maxuptake", "Uptake", "Exposure"]).to_csv(files[0] + "results.csv")
         i+=1
-
-
-
+        
+        
+ 
