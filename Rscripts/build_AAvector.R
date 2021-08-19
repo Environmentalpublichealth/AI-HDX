@@ -29,12 +29,15 @@ AA54 = matrix(c(
   dimnames = list(c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"),  c("Conformational parameter of beta-turn","Chou-Fasman parameter of the coil conformation","Average volume of buried residue","Residue accessible surface area in folded protein","Normalized frequency of beta-sheet","Normalized frequency of beta-turn","Normalized frequency of turn","Size","Amino acid composition","Relative mutability","Molecular weight","Number of hydrogen bond donors","Positive charge","Negative charge","Helix-coil equilibrium constant","Alpha-helix indices","Hydrophobicity factor","Residue volume","Polarity","Hydrophobicity value","Heat capacity","Normalized relative frequency of bend","Normalized relative frequency of coil","Average accessible surface area","Percentage of buried residues","Percentage of exposed residues","Transfer free energy","Relative frequency of occurrence","Average relative probability of helix","Net charge","Side chain volume","Hydropathy index","Normalized frequency of beta-sheet unweighted","Normalized frequency of left-handed alpha-helix","Refractivity","Average side chain orientation angle","Normalized frequency coil","AA composition of total proteins","Average non-bonded energy per atom","Long range non-bonded energy per atom","Average non-bonded energy per residue","Optimized propensity to form reverse turn","Relative frequency in alpha-helix","Information measure for pleated-sheet","Information measure for loop","Normalized frequency of extended structure","Average interactions per side chain atom","Polar requirement","Bulkiness","Isolelectric point","Free energy in alpha-helical region","Free energy in beta-strand region","Number of codon(s)","Solvation free energy"))
 )
 
+AminoAcids = c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y")
 AAbyGroup = c("aliphatic", "cysteine", "acidic", "acidic", "aromatic", "aliphatic", "basic", "aliphatic", "basic", "aliphatic", "aliphatic", "aminic", "proline", "aminic", "basic", "hydroxylated", "hydroxylated", "aliphatic", "aromatic", "aromatic")
+
 
 
 AA54_PCA = princomp(AA54, covmat = cov.wt(AA54))
 
-Factor54 = factor.pa.ginv(AA54, nfactors = 5, m=3, prerotate=TRUE, rotate="Promax", scores="regression")
+Factor54 = factor.pa.ginv(AA54, nfactors = 5, m=4, prerotate=TRUE, rotate="Promax", scores="regression")
+Factor54$loadings
 Factor54$loadings[order(Factor54$loadings[,1]),]  
 
 data = data.frame(Factor54$scores[,1:3])
@@ -44,11 +47,21 @@ data$class = AAbyGroup
 library(ggplot2)
 ggplot(data = data, aes(x=F1, y=F2, color=class))+
   geom_point()+
-  geom_text(aes(label=AA),hjust=0, vjust=0)
+  geom_text(aes(label=AA),hjust=0, vjust=0)+
+  theme_bw(base_size = 16)
+
+var = data.frame(variable = c("F1","F2","F3","F4","F5"), value = c(0.292,0.478,0.654,0.763,0.839))
+
+ggplot(data = var, aes(x=variable, y = value))+
+  geom_bar(stat = "identity", color = "black",fill = "white")+
+  geom_text(aes(label=value),vjust=-0.3, size=3.5) +
+  ylim(c(0,1))+
+  labs(x="", y="accumulative variance")+
+  theme_bw(base_size = 16)
 
 #install.packages("plot3D")
 library(plot3D)
-text3D(data$F1,data$F2, data$F3, bty = "g", pch = 18, 
+text3D(data$F1,data$F2, data$F3, bty = "g", pch = 12, 
        labels = data$AA,
           col = as.integer(data$class), 
           pch = 18, ticktype = "detailed",
