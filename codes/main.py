@@ -27,8 +27,9 @@ for row in manager:
     #uptake prediction
     xlist, ylist, predict, predictedvals = [], [], float(uptakepredict), []
     for index, row in df.iterrows():
-        xlist.append(row["Exposure"])
-        ylist.append(row["Uptake"])
+        if row["State"] == files[1].strip():
+            xlist.append(row["Exposure"])
+            ylist.append(row["Uptake"])
     predictedvals = linreg(xlist, ylist, predict)
     
     #protein merge
@@ -40,34 +41,21 @@ for row in manager:
     protein_merge(start, end, sequence)
 
     #writing all the data to a results file
-    i = 0; j = []
-    '''for index, row in df.iterrows():
-        j = float(row["Exposure"])
-        break
-    while jc !=2:
-        for index, row in df.iterrows(): #0, 1, 2, 3, 0, 1, 2, 3
-            if float(row["Exposure"]) == j:
-                jc+=1
-            loop+=1
-    loop = loop - 1
-    flag = True; cc = 0
-    while flag != False:
-        for index, row in df.iterrows():
-            cc+=1
-            if float(row["Exposure"]) < uptakepredict:
-                flag = True
-            if float(row["Exposure"]) >= uptakepredict:
-                flag = False '''
+    l = []
     for index, row in df.iterrows():
-        if row["State"] == files[1].strip():
-            
+        l.append(float(row["Exposure"]))
+    
+    i = 0; j = []; k =0
+    for index, row in df.iterrows():
+        if row["State"] == files[1].strip(): 
             #j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[i], predictedvals[i], row["Uptake"], row["Exposure"]])
-            if row["Exposure"] == uptakepredict:
-                j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[i], row["Uptake"], row["Exposure"], predictedvals[i]])
-            else:
-                j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[i], row["Uptake"], row["Exposure"], row["Uptake"]])
-            pd.DataFrame(j, index = None, columns = ["Start", "End", "Sequence","State", "Maxuptake", "Uptake", "Exposure", "Predicted Maxuptake"]).to_csv(files[0] + "results.csv")
-        i+=1
+            j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[k], row["Uptake"], row["Exposure"], None])
+            if l[k] < float(uptakepredict) and l[k+1] >= float(uptakepredict):
+                j.append([None, None, None, None, None, None, uptakepredict, predictedvals[i]])
+                i+=1
+            
+            pd.DataFrame(j, index = None, columns = ["Start", "End", "Sequence","State", "Maxuptake", "Uptake", "Exposure", "Predicted Uptake" +f' ({uptakepredict})' ]).to_csv(files[0] + "results.csv")
+            k+=1
 
 
     dfres = pd.read_csv(files[0] +"results.csv")
@@ -95,7 +83,7 @@ for row in manager:
     removeOverlap(start_list[0], end_list[0])
 
     #print(modeltesting)
-    training(modeltesting, hdx)
+    #training(modeltesting, hdx)
     
     
  
