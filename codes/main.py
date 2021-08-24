@@ -17,12 +17,12 @@ for row in manager:
 
     #maxuptake
     mut = []
-    if "Maxuptake" not in df[0:0]:
+    if "MaxUptake" not in df[0:0]:
         for index, row in df.iterrows():
             mut.append(len(str((row["Sequence"]))) - 1 - str(row["Sequence"]).count("P"))
     else:
         for index, row in df.iterrows():
-            mut.append(row["Maxuptake"])
+            mut.append(row["MaxUptake"])
 
     #uptake prediction
     xlist, ylist, predict, predictedvals = [], [], float(uptakepredict), []
@@ -51,14 +51,14 @@ for row in manager:
             #j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[i], predictedvals[i], row["Uptake"], row["Exposure"]])
             j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[k], row["Uptake"], row["Exposure"], None])
             if l[k] < float(uptakepredict) and l[k+1] >= float(uptakepredict):
-                j.append([None, None, None, None, None, None, uptakepredict, predictedvals[i]])
+                j.append([row["Start"], row["End"], row["Sequence"], row["State"], mut[k], row["Uptake"], uptakepredict, predictedvals[i]])
                 i+=1
             
-            pd.DataFrame(j, index = None, columns = ["Start", "End", "Sequence","State", "Maxuptake", "Uptake", "Exposure", "Predicted Uptake" +f' ({uptakepredict})' ]).to_csv(files[0] + "results.csv")
+            pd.DataFrame(j, index = None, columns = ["Start", "End", "Sequence","State", "MaxUptake", "Uptake", "Exposure", "Predicted Uptake" +f' ({uptakepredict})' ]).to_csv(files[0] + ".results.csv")
             k+=1
 
 
-    dfres = pd.read_csv(files[0] +"results.csv")
+    dfres = pd.read_csv(files[0] +".results.csv")
     #vector
     modeltesting = []
     for index, row in dfres.iterrows():
@@ -72,7 +72,7 @@ for row in manager:
     #calculating drate
     hdx = []
     for index, row in dfres.iterrows():
-        hdx.append(drate(row["Uptake"], row["Maxuptake"]))
+        hdx.append(drate(row["Uptake"], row["MaxUptake"]))
     #print(hdx)
     
     #remove overlap
