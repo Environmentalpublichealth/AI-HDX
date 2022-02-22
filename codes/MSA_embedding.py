@@ -13,13 +13,12 @@ import pandas as pd
 
 hhm_file = sys.argv[1]
 dssp_file = sys.argv[2]
-matrix_file = sys.argv[3]
-output_file = sys.argv[4]
+output_file = sys.argv[3]
 
 # add amino acid properties matrix to the final vector
 ## read the matrix table and turn it into a dictionary
 ### convert sequence to number vector
-AA_table = pd.read_csv(matrix_file)
+AA_table = pd.read_csv("dataset/HDMDvector.csv")
 AA_array = AA_table.set_index('ID').T.to_dict('list')
 ### convert the list in dictionary to array
 for key, value in AA_array.items():
