@@ -17,7 +17,7 @@ library(ggplot2)
 ggplot(datasum, aes(x = col, y = X, fill= value))+
   geom_tile()+
   geom_text(aes(label=round(value, 2)))+
-  scale_fill_gradient(low="white",high="blue")+
+  scale_fill_gradient(low="white",high="#0072B2")+
   theme_classic()+
   scale_y_continuous(trans = "reverse", breaks = datasum$X)+
   theme(axis.title.x = element_blank(),
