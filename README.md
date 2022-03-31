@@ -54,7 +54,7 @@ A `PDB_ID_file.pdb.dssp.txt` will be created in the same directory that has the 
 ## Combine MSA encoding and surface accessibility and AA properties into a matrix
 ```bash
 conda activate mypython3
-python codes/MSA_embedding.py <hhm file> <pdb.dssp.txt> <property_matrix.csv> <output.vector.txt>
+python codes/MSA_embedding.py <hhm file> <pdb.dssp.txt> <output.vector.txt>
 ```
 Each AA of a protein will be represented by the 36 numbers in the `output.vector.txt`.           
 Use the `output.vector.txt` to encode the peptide sequences in the HDX result table.
@@ -89,3 +89,18 @@ line 13: MYDB="/scratch/data/bio/rosetta/bfd/bfd_metaclust_clu_complete_id30_c90
 line 11: /sw/eb/sw/csblast/2.2.3-Linux64/bin/csbuild # the correct path for csblast program
 line 11: /sw/eb/sw/csblast/2.2.3-Linux64/data/K4000.crf
 ```
+## Create peptide fragments
+Using the Web-based tool https://web.expasy.org/peptide_mass/.      
+* Input - protein sequence
+* Output - save the output into a csv file with start, stop, seq, HDX rate like this:
+```csv
+8,21,DSASSPPYSVNQNL,8.93
+8,21,DSASSPPYSVNQNL,13.84
+34,45,YVDKLSSSGASW,6.55
+34,45,YVDKLSSSGASW,8.23
+46,60,HTEWTWSGGEGTVKS,9.09
+46,68,HTEWTWSGGEGTVKSYSNSGVTF,5.16
+```
+
+# AI-HDX prediction. 
+We will need two inputs, the sequence embedding vector `vector.output.txt` and the peptide fragment table `protein.csv`. 
