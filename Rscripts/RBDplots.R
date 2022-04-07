@@ -11,7 +11,7 @@ data <- melt(predData[,c(1,2,4,6,8)])
 data$SD <- c(predData$SD, predData$SD.1, predData$SD.2, predData$SD.3)/10
 
 ggplot(data, aes(x= peptide, y=value, group = variable, color=variable))+
-  geom_line(size = 1.1, alpha = 0.8) + 
+  geom_line(size = 1.1, alpha = 0.9) + 
   geom_errorbar(aes(ymin = value-SD, ymax=value+SD), width=.2)+
   theme_classic(base_size = 16)+
   labs(x = "Peptide fragment", y = "HDX rate", color = "")+

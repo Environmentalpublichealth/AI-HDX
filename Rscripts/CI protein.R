@@ -15,6 +15,19 @@ ggplot(CI_data, aes(x = mean.CI, y = RMSE, label= ID))+
 
 ggsave("../images/validateCI.pdf", height = 6, width = 5.5)
 
+CI_data$Model <- factor(CI_data$Model)
+ggplot(CI_data, aes(x = mean.CI, y = RMSE, color = Model))+
+  geom_point()+
+  geom_smooth(aes(group =1),method = lm)+
+  scale_color_brewer(palette = "Dark2")+
+  # geom_hline(yintercept=0, linetype="dashed")+
+  # ylim(0, 0.5)+
+  # xlim(0.2,0.8)+
+  labs(x = "mean CI")+
+  theme_classic()
+
+ggsave("../images/validateCI0405.pdf", height = 3, width = 5)
+
 # barplot
 ggplot(CI_data)+
   geom_bar(aes(x = ID, y = RMSE), stat = "identity")+
