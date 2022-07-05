@@ -21,14 +21,18 @@ model = structure[0]
 dssp = DSSP(model, PDB_file,dssp='/mkdssp')
 
 # calculate the number of AA in the protein 
+aa_list = []
 for chain in structure.get_chains():
     AA_len = len([_ for _ in chain.get_residues() if PDB.is_aa(_)])
-
-#print(AA_len)
+    
+    for id in chain.get_residues():
+        if PDB.is_aa(id):
+            aa_list.append(id)
+print(len(aa_list))
 
 # write the dssp result into a table
 with open(PDB_file+".dssp.txt","w") as out:
-    for i in range(0,AA_len):
+    for i in range(0,len(aa_list)):
         a_key = list(dssp.keys())[i]
         for item in list(dssp[a_key]):
             out.write(str(item)+"\t")

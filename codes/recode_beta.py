@@ -2,7 +2,7 @@
 Created on Feb 24, 2022
 Author: Jiali
 Usage, replace the beta value in pdb file to HDX rates
-python recode_beta. py <pdf file> <HDX.csv> <output.pdb>
+python recode_beta. py <pdb file> <HDX.csv> <output.pdb>
 """
 import sys
 from Bio import PDB
@@ -36,7 +36,9 @@ with open(structurePDB) as f, open(HDXPDB,"w") as out:
             PDBcontents[10] = HDXlist[resID]
             # print(PDBcontents)
             # format the table into pdb format: https://cupnet.net/pdb-format/
-            PDBtext = "{:6s}{:5d} {:^4s}{:1s}{:3s} {:1s}{:4d}{:1s}   {:8.3f}{:8.3f}{:8.3f}{:6.2f}{:6.2f}          {:>2s}{:2s}".format(PDBcontents[0],int(PDBcontents[1]),PDBcontents[2],"",PDBcontents[3],PDBcontents[4],int(PDBcontents[5]),"",float(PDBcontents[6]),float(PDBcontents[7]),float(PDBcontents[8]),float(PDBcontents[9]),float(PDBcontents[10]),PDBcontents[11],"")
+            PDBtext = "{:6s}{:5d} {:^4s}{:1s}{:3s} {:1s}{:4d}{:1s}   {:8.3f}{:8.3f}{:8.3f}{:6.2f}{:6.2f}          {:2s}".format(PDBcontents[0],int(PDBcontents[1]),PDBcontents[2],"",PDBcontents[3],PDBcontents[4],int(PDBcontents[5]),"",float(PDBcontents[6]),float(PDBcontents[7]),float(PDBcontents[8]),float(PDBcontents[9]),float(PDBcontents[10]),"") # file from rosettafold/alphafold
+#            PDBtext = "{:6s}{:5d} {:^4s}{:1s}{:3s} {:1s}{:4d}{:1s}   {:8.3f}{:8.3f}{:8.3f}{:6.2f}{:6.2f}          {:>2s}{:2s}".format(PDBcontents[0],int(PDBcontents[1]),PDBcontents[2],"",PDBcontents[3],PDBcontents[4],int(PDBcontents[5]),"",float(PDBcontents[6]),float(PDBcontents[7]),float(PDBcontents[8]),float(PDBcontents[9]),float(PDBcontents[10]),PDBcontents[11],"") # file download from PDB 
+
             out.write(PDBtext+"\n")
         else:
             out.write(PDBline)
