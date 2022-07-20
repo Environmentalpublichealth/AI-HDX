@@ -1,4 +1,4 @@
-# Seq2HDX
+# AI-HDX
 
 ## MSA encoding protein sequence
 ### Install HHBlits via conda
@@ -103,4 +103,6 @@ Using the Web-based tool https://web.expasy.org/peptide_mass/.
 ```
 
 # AI-HDX prediction. 
-We will need two inputs, the sequence embedding vector `vector.output.txt` and the peptide fragment table `protein.csv`. 
+We will need two inputs, the sequence embedding vector `vector.output.txt` and the peptide fragment table `protein.csv`.  
+Run AI-HDX on google colab:
+[AI-HDX colab](https://colab.research.google.com/github/Environmentalpublichealth/AI-HDX/blob/main/AI_HDX.ipynb)
