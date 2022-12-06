@@ -1,4 +1,4 @@
-﻿Protein state,Start,End,Sequence,Peptide mass (Da),Retention time (min),HDX time (sec),Uptake (D),Uptake SD (D)
+﻿State,Start,End,Sequence,Peptide mass (Da),Retention time (min),Exposure,Uptake,Uptake SD (D)
 Alone,14,29,ERSKAIEKNLKEDGIS,1816.9763,3.646368,10,4.565584,0.969419355
 Alone,14,29,ERSKAIEKNLKEDGIS,1816.9763,3.645763,100,7.248293667,0.498042353
 Alone,14,29,ERSKAIEKNLKEDGIS,1816.9763,3.650059,1000,7.595114333,0.355420889

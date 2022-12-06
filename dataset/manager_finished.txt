@@ -1,0 +1,44 @@
+20181213_AriH2_StateData: AriH2
+beta2AR: Alone
+GoA-alpha: Alone
+GoA-beta: Alone
+GoA-gamma: Alone
+HDX data_11914-1: unbound
+HDX data_11914-4: unbound
+HDX_18028: apo
+HDX_19884_kawasaki: unbound
+HDX_19884_MIOO1: unbound
+HDX_19884_Vietnam: unbound
+LptD: Apo
+LptE: Apo
+p65: Default State
+GSTP0: Stalk alone
+GSTP1: Stalk alone
+GSTP2: Stalk alone
+GCN2: Apo
+RBX1_state_20181019: Rbx1
+state_19810: apo
+State_data_Bcd1p_profile: Bcd
+State_data_M5_vs_M5-L18-RNA: M5_alone
+CCL8: Unbound
+AcrB_DynamXoutputs_Fasta_2: AcrB_WT
+CSN2_state_20181019: 1_CSN2_WT
+CSN2_state_23102018: CSN
+CSN3_state_20181019: CSN3
+CSN3_state_23102018: CSN
+CSN4_state_20181019: 1_CSN4_WT
+CSN4_state_23102018: CSN
+CSN5_state_20181019: CSN
+CSN5_state_23102018: CSN
+CSN6_state_20181019: CSN6
+CSN6_state_23102018: CSN
+CSN7_state_20181019: CSN7B
+CSN7B_state_23102018: CSN
+CSN8_state_20181019: CSN8
+CSN8_state_23102018: CSN
+CUL2_state_20181019: Cul2
+ELOC_state_20181019: Eloc
+Raptor: Apo
+PRAS40: Apo
+CbdA: apo
+P672: Unbound
