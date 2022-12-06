@@ -4,7 +4,7 @@ Author: Jiali
 Usage: Take the HHBlits output hhm format, and encode the protein sequence
 python3 environment
 Run:
-python MSA_embedding.py <proteinID.hhm> <pdb.dssp.txt> <matrix_file.csv> <output txt file for embedding vector>
+python MSA_embedding.py <proteinID.hhm> <pdb.dssp.txt> <output txt file for embedding vector>
 """
 import sys
 import math
