@@ -5,6 +5,8 @@ Weekly meeting: 7 pm -7:30 pm Thursday June 8th to June 22th.
 2. Try simple, example codes
 3. Build our own!         
 
+Type what you want to write. 
+
 First step:
 * user need to prepare their own inputs, and can upload their input files
   * Text boxes to paste input
