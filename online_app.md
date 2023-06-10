@@ -1,8 +1,7 @@
 ### Deploy the codes as a web tool
 Weekly meeting: 7 pm -7:30 pm Thursday June 8th to June 22th.
 
-1. find a platform 
-wix.com
+1. find a platform: wix.com
 
 
 2. Try simple, example codes
