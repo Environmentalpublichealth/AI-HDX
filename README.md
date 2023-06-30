@@ -32,3 +32,8 @@ Using the Web-based tool https://web.expasy.org/peptide_mass/.
 We will need two inputs, the sequence embedding vector `vector.output.txt` and the peptide fragment table `protein.csv`.  
 Run AI-HDX on google colab:
 [AI-HDX colab](https://colab.research.google.com/github/Environmentalpublichealth/AI-HDX/blob/main/AI_HDX.ipynb)
+
+### Publication
+Yu, J., Uzuner, U., Long, B., Wang, Z., Yuan, J. S., & Dai, S. Y. (2023). Artificial intelligence-based HDX (AI-HDX) prediction reveals fundamental characteristics to protein dynamics: Mechanisms on SARS-CoV-2 immune escape. Iscience, 26(4).
+https://doi.org/10.1016/j.isci.2023.106282
+
