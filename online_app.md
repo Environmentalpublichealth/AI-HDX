@@ -60,5 +60,5 @@ To make it in the browser, you need to copy the url 'http://127.0.0.1:8000' it g
 - Get simple browser in VS code: View -> Command Pallette..., search 'simple browser' and choose it. Paste the URL shiny generated in the box and hit enter. A browser window will be open in the VS code.
 - click the 'split editor right' button at the upper right corner, like '[|]' shape, and you can put the shiny app in simple browser on one side and open the app.py on the other side at the same time. The elements in the browser should be changing when editing the codes and save in app.py. 
 
-5. Stop shiny
+5. Stop shiny       
 Do control+C to end shiny in the terminal. 
