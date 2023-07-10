@@ -1,5 +1,5 @@
 ### Deploy the codes as a web tool
-Weekly meeting: 7 pm -7:30 pm Thursday June 8th to June 22th.
+Weekly meeting: 7 pm -7:30 pm CT Thursday June 8th to June 22th.
 
 1. find a platform: wix.com
 
@@ -61,4 +61,18 @@ To make it in the browser, you need to copy the url 'http://127.0.0.1:8000' it g
 - click the 'split editor right' button at the upper right corner, like '[|]' shape, and you can put the shiny app in simple browser on one side and open the app.py on the other side at the same time. The elements in the browser should be changing when editing the codes and save in app.py. 
 
 5. Stop shiny       
-Do control+C to end shiny in the terminal. 
+Do control+C to end shiny in the terminal.
+
+### Functions need in app
+1. input windows
+   - one for the vector.txt (tab separated text file)
+   - one for fragment.csv (comma separated text file)
+2. read the two inputs into two variables
+3. migrate the codes from the AI-HDX model google colab to app.py
+   - one function to preprocess the two inputs
+   - one function to run machine learning models
+4. display the results
+   - one function to simply print out the table
+   - one function/or a couple of lines of script to create a bottom for result download. - need to find out
+5. Plotting
+   - one function to plot the result into a line/bar/scatter plot
