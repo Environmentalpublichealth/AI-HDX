@@ -48,10 +48,10 @@ def server(input: Inputs, output: Outputs, session: Session):
         filename_csv = "zig.kuang" + str(time()) + ".csv"
         os.makedirs('AI-HDX_app/save_file', exist_ok=True)
         path = os.path.abspath(os.getcwd())
-        df.to_csv(os.path.join(path + "AI-HDX_app/save_file", filename_csv))
+        df.to_csv(os.path.join(path + "/AI-HDX_app/save_file", filename_csv))
 
         #save file to variable
-        df_csv = pd.read_csv(os.path.join(path + "AI-HDX_app/save_file", filename_csv))
+        df_csv = pd.read_csv(os.path.join(path + "/AI-HDX_app/save_file", filename_csv))
 
         # return visible table with data
         return ui.HTML(df.to_html(classes="table table-striped"))
@@ -69,10 +69,10 @@ def server(input: Inputs, output: Outputs, session: Session):
         filename_txt = "zig.kuang" + str(time()) + ".txt"
         os.makedirs('AI-HDX_app/save_file', exist_ok=True)
         path = os.path.abspath(os.getcwd())
-        df.to_csv(os.path.join(path + "AI-HDX_app/save_file", filename_txt))
+        df.to_csv(os.path.join(path + "/AI-HDX_app/save_file", filename_txt))
         
         #save file to variable
-        df_txt = pd.read_csv(os.path.join(path + "AI-HDX_app/save_file", filename_txt), delimiter="\t")
+        df_txt = pd.read_csv(os.path.join(path + "/AI-HDX_app/save_file", filename_txt), delimiter="\t")
 
         # return visible table with data
         return ui.HTML(df.to_html(classes="table table-striped"))
