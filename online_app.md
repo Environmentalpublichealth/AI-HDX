@@ -66,7 +66,8 @@ Do control+C to end shiny in the terminal.
 ### Functions need in app
 :white_check_mark:1. input windows
    - one for the vector.txt (tab separated text file)
-   - one for fragment.csv (comma separated text file)        
+   - one for fragment.csv (comma separated text file)
+   - user name text box  
 
 :white_check_mark:2. read the two inputs into two variables
 
