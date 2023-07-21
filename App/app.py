@@ -2,10 +2,12 @@ import pandas as pd
 from time import time
 import os
 
-from shiny import App, Inputs, Outputs, Session, render, ui
+from shiny import App, Inputs, Outputs, Session, render, ui, reactive
 from shiny.types import FileInfo
 
 app_ui = ui.page_fluid(
+    {"id": "main-content"},
+    ui.h2("Predicting protein dynamics with AI-HDX"),
     ui.row(  
         ui.column(
             6, #length of input box
@@ -33,6 +35,8 @@ app_ui = ui.page_fluid(
             int = 3 #space between input boxes
         ),
     ),
+    ui.input_action_button("btn", "Predict HDX"), # add a click button
+    ui.output_text_verbatim("txt", placeholder=True), # output space
 )
 
 def server(input: Inputs, output: Outputs, session: Session):
@@ -77,6 +81,21 @@ def server(input: Inputs, output: Outputs, session: Session):
         # return visible table with data
         return ui.HTML(df.to_html(classes="table table-striped"))
 
+    # The @reactive.event() causes the function to run only when input.btn is
+    # invalidated.
+    @reactive.Effect
+    @reactive.event(input.btn)
+    def _():
+        # here we should migrate the model! 
+        print("You clicked the button!")
+        # You can do other things here, like write data to disk.
+
+    # This output updates only when input.btn is invalidated.
+    @output
+    @render.text
+    @reactive.event(input.btn)
+    def txt():
+        return f"Here is your output!"
 app = App(app_ui, server)
 
 
