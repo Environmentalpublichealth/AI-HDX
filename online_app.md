@@ -82,3 +82,8 @@ Do control+C to end shiny in the terminal.
    - one function/or a couple of lines of script to create a bottom for result download. - need to find out
 6. Plotting
    - one function to plot the result into a line/bar/scatter plot
+7. Web design
+   - Font, size of the text
+   - color of background
+   - color of the button
+   - color of the text box and input window
