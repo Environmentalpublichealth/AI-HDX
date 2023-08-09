@@ -63,27 +63,35 @@ To make it in the browser, you need to copy the url 'http://127.0.0.1:8000' it g
 5. Stop shiny       
 Do control+C to end shiny in the terminal.
 
-### Functions need in app
-:white_check_mark:1. input windows
-   - one for the vector.txt (tab separated text file)
-   - one for fragment.csv (comma separated text file)
-   - user name text box  
+### Functions needed in app
+1. input windows
+   - :white_check_mark:one for the vector.txt (tab separated text file)
+   - :white_check_mark:one for fragment.csv (comma separated text file)
+   - :white_check_mark:user name text box
+   - future feature: input protein sequences instead of the fragment, write a function to cut proteins and write fragments into csv
 
-:white_check_mark:2. read the two inputs into two variables
+:white_check_mark:2. save the input files with username and time stamp - Anna's idea
 
 3. migrate the codes from the AI-HDX model google colab to app.py
    - :white_check_mark:add a submit button. In the button action:
-   - one function to preprocess the two inputs
-   - one function to run machine learning models
-   - Install tensorflow and need to make tensorflow compatible with shiny
+   - :white_check_mark:one function to preprocess the two inputs
+   - :white_check_mark:one function to run machine learning models
+   - :white_check_mark:Install tensorflow and need to make tensorflow compatible with shiny
    - A download button to download result
 5. display the results
-   - one function to simply print out the table
-   - one function/or a couple of lines of script to create a bottom for result download. - need to find out
+   - :white_check_mark:one function to simply print out the table
+   - one function to visualize results on protein structure - need to find out
 6. Plotting
-   - one function to plot the result into a line/bar/scatter plot
+   - :white_check_mark:one function to plot the result into a line/bar/scatter plot
+   - integrate the plot to shiny
 7. Web design
    - Font, size of the text
    - color of background
    - color of the button
    - color of the text box and input window
+   - descriptions and instructions for the app usage
+   - copyright, authorship claim
+   - warnings about prediction accuracy
+8. Auto-fill examples
+   - a button to load example inputs
+ 
