@@ -63,6 +63,9 @@ To make it in the browser, you need to copy the url 'http://127.0.0.1:8000' it g
 5. Stop shiny       
 Do control+C to end shiny in the terminal.
 
+### Meeting schedule
+* biweekly - Saturday, 2:30 pm EST
+
 ### Functions needed in app
 1. input windows
    - :white_check_mark:one for the vector.txt (tab separated text file)
