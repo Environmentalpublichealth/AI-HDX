@@ -80,7 +80,7 @@ Do control+C to end shiny in the terminal.
    - :white_check_mark:one function to preprocess the two inputs
    - :white_check_mark:one function to run machine learning models
    - :white_check_mark:Install tensorflow and need to make tensorflow compatible with shiny
-   - A download button to download result
+   - :white_check_mark:A download button to download result
 5. display the results
    - :white_check_mark:one function to simply print out the table
    - one function to visualize results on protein structure - need to find out
