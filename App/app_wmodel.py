@@ -1,7 +1,9 @@
 import pandas as pd
+import numpy as np
 from time import time
 import os
 import glob
+# import asyncio
 
 from embedding import seq_embedding
 from AIHDX import prediction
@@ -14,6 +16,7 @@ app_ui = ui.page_fluid(
     ui.h2("Predicting protein dynamics with AI-HDX, Try it!"),
     ui.input_text_area("username", "Input your username (i.e. john.smith):"),
     ui.output_ui("show_username"),
+    # ui.output_plot("myplot"),
     ui.row(  
         ui.column(
             6, #length of input box
@@ -43,6 +46,8 @@ app_ui = ui.page_fluid(
     ),
     ui.input_action_button("btn", "Submit your data"), # add a click button
     ui.output_table("result"), # output a table
+    ui.download_button("downloadData", "Download"), # add a click button for downloading the prediction
+
 )
 
 def server(input: Inputs, output: Outputs, session: Session):
@@ -111,14 +116,28 @@ def server(input: Inputs, output: Outputs, session: Session):
     @reactive.event(input.btn)
     def result():
         #run embedding using the input file
-        username = input.username()        
+        global username     
+        username = input.username()  
         path = os.path.abspath(os.getcwd())
         filename_csv = glob.glob(path + "/AI-HDX_app/save_file/"+ username +"*.csv")
         filename_txt = glob.glob(path + "/AI-HDX_app/save_file/"+ username +"*.txt")
         prot= filename_csv[0]
         df = filename_txt[0]
         prot1,df1=seq_embedding(prot, df)
+        # make prediction table a global variable
+        global output_df
         # run prediction
         output_df = prediction(prot1, df1)
         return output_df
+    
+    # downloads a file when download button is clicked
+    @session.download(        
+        filename=lambda: f"AI-HDX_results-{username}-{time()}.csv",
+
+    )
+
+    # writes prediction into the downloaded file
+    async def downloadData():       
+        yield output_df.to_string(index=False)
+        
 app = App(app_ui, server)
