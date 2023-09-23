@@ -73,6 +73,21 @@ Do control+C to end shiny in the terminal.
    - :white_check_mark:user name text box
    - future feature: input protein sequences instead of the fragment, write a function to cut proteins and write fragments into csv
 
+An example of fasta file:
+```txt
+>sp|P00709|LALBA_HUMAN
+MRFFVPLFLVGILFPAILAKQFTKCELSQLLKDIDGYGGIALPELICTMFHTSGYDTQAIVENNESTEYGLFQISNKLWCKSSQVPQSRNICDISCDKFLDDDITDDIMCAKKILDIKGIDYWLAHKALCTEKLEQWLCEKL
+
+The function should 
+1. determine sequence length, 0 - 143
+2. randomly cut the sequence into fragments with 5 - 20 letters 
+ 0,3, MRFF
+ 4,10, VPLFL
+ 11,20, VGILFPAILA
+....
+3. Output the fragments into csv format so the model can use. 
+```
+
 :white_check_mark:2. save the input files with username and time stamp - Anna's idea
 
 3. migrate the codes from the AI-HDX model google colab to app.py
