@@ -14,6 +14,13 @@ from shiny.types import FileInfo
 app_ui = ui.page_fluid(
     {"id": "main-content"},
     ui.h2("Predicting protein dynamics with AI-HDX, Try it!"),
+    ui.h3("Instructions:"),
+    ui.h4("Step 1. Preprocessing"),
+    ui.h4("Step 2. Create peptide fragments"),
+    ui.p("For more information, go to the AI-HDX Github page or read the paper linked below."),
+    ui.p("Github: https://github.com/Environmentalpublichealth/AI-HDX"),
+    ui.p("Paper: https://www.cell.com/iscience/fulltext/S2589-0042(23)00359-0?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2589004223003590%3Fshowall%3Dtrue"),
+
     ui.input_text_area("username", "Input your username (i.e. john.smith):"),
     ui.output_ui("show_username"),
     # ui.output_plot("myplot"),
@@ -44,9 +51,19 @@ app_ui = ui.page_fluid(
             int = 3 #space between input boxes
         ),
     ),
-    ui.input_action_button("btn", "Submit your data"), # add a click button
     ui.output_table("result"), # output a table
-    ui.download_button("downloadData", "Download"), # add a click button for downloading the prediction
+    ui.row(
+        ui.column(
+            3,
+            ui.input_action_button("btn", "Submit your data"), # add a click button
+        ),
+        ui.column(
+            3,
+            ui.download_button("downloadData", "Download"), # add a click button for downloading the prediction
+        ),
+        int = 30
+    )
+    
 
 )
 
