@@ -3,6 +3,7 @@ import numpy as np
 from time import time
 import os
 import glob
+import matplotlib.pyplot as plt
 # import asyncio
 
 from embedding import seq_embedding
@@ -23,7 +24,6 @@ app_ui = ui.page_fluid(
 
     ui.input_text_area("username", "Input your username (i.e. john.smith):"),
     ui.output_ui("show_username"),
-    # ui.output_plot("myplot"),
     ui.row(  
         ui.column(
             6, #length of input box
@@ -62,8 +62,8 @@ app_ui = ui.page_fluid(
             ui.download_button("downloadData", "Download"), # add a click button for downloading the prediction
         ),
         int = 30
-    )
-    
+    ),
+    ui.output_plot("myplot"),
 
 )
 
@@ -145,7 +145,10 @@ def server(input: Inputs, output: Outputs, session: Session):
         global output_df
         # run prediction
         output_df = prediction(prot1, df1)
+        result_df = output_df.to_csv(os.path.join(path + "/AI-HDX_app/save_file/"+username+"AI-HDX_results.csv"))
         return output_df
+    
+    
     
     # downloads a file when download button is clicked
     @session.download(        
@@ -157,4 +160,32 @@ def server(input: Inputs, output: Outputs, session: Session):
     async def downloadData():       
         yield output_df.to_string(index=False)
         
+
+    # make plot
+    @output
+    @render.plot(alt="A bar")
+    @reactive.event(input.btn)
+    def myplot():
+        num_rows = len(output_df)
+        NumAA = list(range(1, num_rows + 1))
+        Values = output_df["average"].tolist()
+        
+        sd = output_df["SD"].tolist()
+        LABELS = output_df[2].tolist()
+        fig, ax = plt.subplots()
+        ax.set_title("Predicted HDX rates")
+        ax.set_xlabel("Peptide Fragment")
+        ax.set_ylabel("Mean of Models")
+
+        ax.bar(NumAA, Values, align='center')
+
+        ax.set_xticks(NumAA)
+        ax.set_xticklabels(LABELS, rotation=45, ha="right")
+        ax.set_yticks(np.arange(0, 1, step=0.025), minor=True)
+
+        ax.errorbar(NumAA, Values, yerr = sd, fmt="o", color="k")
+
+        fig.tight_layout()
+        return fig
+
 app = App(app_ui, server)
