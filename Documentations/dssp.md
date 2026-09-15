@@ -3,6 +3,7 @@ Search for the right protein and get the correct PDB files from either PDB or Al
 ### Compute surface accessible area
 ```bash
 # in the conda environment, get biopython and dssp installed
+conda create -n mypython3
 conda activate mypython3
 conda install -c salilab dssp # only need to run it once
 conda install -c conda-forge biopython # only need to run it once
