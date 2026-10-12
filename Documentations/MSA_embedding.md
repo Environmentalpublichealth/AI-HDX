@@ -12,6 +12,12 @@ cd databases
 nohup wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz &
 tar -xvfz UniRef30_2020_06_hhsuite.tar.gz
 ```
+If there is an error message "tar no such file or directory", it is the `-f` file parameter needs to be put at the end. 
+```bash
+tar -xvzf UniRef30_2020_06_hhsuite.tar.gz
+```
+Then the decompression should be run without an error. 
+
 The download takes ~6 hours, because it is connected to a German server.
 
 ### Run HHBlits
