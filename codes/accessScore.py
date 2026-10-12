@@ -5,20 +5,32 @@ Created on Mon Jul 19 15:38:40 2021
 
 @author: jiali
 Calculate surface accessibility from PDB
-Usage: python accessScore.py <ID> <PDB_file.pdb>
+Usage: python accessScore.py <ID> <PDB_file.pdb|.cif>
 """
+import os
+import shutil
 import sys
 from Bio import PDB
-from Bio.PDB import PDBParser
+from Bio.PDB import PDBParser, MMCIFParser
 from Bio.PDB.DSSP import DSSP
 PDB_ID = sys.argv[1]
 PDB_file = sys.argv[2]
 
-p = PDBParser()
+if PDB_file.lower().endswith(".cif"):
+    p = MMCIFParser(QUIET=True)
+else:
+    p = PDBParser(QUIET=True)
 structure = p.get_structure(PDB_ID,PDB_file)
 model = structure[0]
 
-dssp = DSSP(model, PDB_file,dssp='/mkdssp')
+# mkdssp 4.x needs the mmCIF dictionaries (mmcif_pdbx.dic, components.cif) to read input
+libcifpp_dir = os.path.join(sys.prefix, "share", "libcifpp")
+if os.path.isdir(libcifpp_dir):
+    os.environ.setdefault("LIBCIFPP_DATA_DIR", libcifpp_dir)
+
+# use $MKDSSP if set, otherwise mkdssp on PATH
+mkdssp = os.environ.get("MKDSSP") or shutil.which("mkdssp") or "mkdssp"
+dssp = DSSP(model, PDB_file,dssp=mkdssp)
 
 # calculate the number of AA in the protein 
 aa_list = []
